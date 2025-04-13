@@ -73,3 +73,61 @@ def export_to_pdf(records):
 
 # Setup database
 setup_database()
+
+# Command Line Interface
+def main():
+    while True:
+        print("\nDatabase System Menu:")
+        print("1. Insert Data")
+        print("2. View All Data")
+        print("3. Search Data")
+        print("4. Trace Data (5 years)")
+        print("5. Delete Data")
+        print("6. Export to PDF")
+        print("7. Exit")
+        
+        choice = input("Enter your choice (1-7): ")
+        
+        if choice == '1':
+            data = input("Enter data to insert: ")
+            insert_data(data)
+            print("Data inserted successfully!")
+            
+        elif choice == '2':
+            records = view_data()
+            print("\nAll Records:")
+            for record in records:
+                print(f"ID: {record[0]}, Data: {record[1]}, Timestamp: {record[2]}")
+                
+        elif choice == '3':
+            search_term = input("Enter search term: ")
+            records = search_data(search_term)
+            print("\nSearch Results:")
+            for record in records:
+                print(f"ID: {record[0]}, Data: {record[1]}, Timestamp: {record[2]}")
+                
+        elif choice == '4':
+            records = trace_data()
+            print("\nData from last 5 years:")
+            for record in records:
+                print(f"ID: {record[0]}, Data: {record[1]}, Timestamp: {record[2]}")
+                
+        elif choice == '5':
+            record_id = input("Enter ID of record to delete: ")
+            delete_data(record_id)
+            print("Record deleted successfully!")
+            
+        elif choice == '6':
+            records = view_data()
+            export_to_pdf(records)
+            print("Data exported to data_records.pdf")
+            
+        elif choice == '7':
+            print("Exiting...")
+            break
+            
+        else:
+            print("Invalid choice. Please try again.")
+
+if __name__ == "__main__":
+    main()
